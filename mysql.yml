@@ -6,10 +6,10 @@ metadata:
 spec: 
   accessModes:
     - ReadWriteOnce
-    storageClassName: default
-    resources:
-      requests:
-        storage: 1Gi
+  storageClassName: default
+  resources:
+    requests:
+      storage: 1Gi
         
 ---
 apiVersion: apps/v1
