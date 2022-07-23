@@ -16,9 +16,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysqldb
-  labels: 
-    app: mysqlapp
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mysqlapp  
@@ -28,7 +27,8 @@ spec:
         app: mysqlapp
     spec:
       containers:
-        - image: mysql:8
+        - name: mysqldb
+          image: mysql:8
           ports:
             - containerPort: 3306
           env: 
@@ -44,9 +44,9 @@ spec:
             - name: mysqlvol
               mountPath: /var/lib/mysql
       volumes:
-        -name: mysqlvol
-        persistentVolumeClaim:
-          claimName: AzureManagedDisk
+        - name: mysqlvol
+         persistentVolumeClaim:
+           claimName: AzureManagedDisk
       
           
 
