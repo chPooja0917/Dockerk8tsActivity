@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openmrs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: openmrsapp
+  template:
+    metadata:
+      labels:
+        name: openmrs
+        app: openmrsapp
+    spec:
+      containers:
+        - image: openmrs:1.0
+          name: openmrs
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openmrsService
+spec:
+  type: LoadBalancer
+  selector:
+    app: openmrsapp
+  ports:
+    - port: 8080  
+      
